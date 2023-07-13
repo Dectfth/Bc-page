@@ -42,12 +42,12 @@ class UserModal extends PureComponent {
     return (
       (<Modal {...modalProps} onOk={this.handleOk}>
         <Form ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
-          <FormItem name='id' rules={[{ required: true }]}
-            label={t`id`} hasFeedback {...formItemLayout}>
+          <FormItem name='title' rules={[{ required: true }]}
+            label={t`title`} hasFeedback {...formItemLayout}>
             <Input />
           </FormItem>
-          <FormItem name='name' rules={[{ required: true }]}
-            label={t`name`} hasFeedback {...formItemLayout}>
+          <FormItem name='url' rules={[{ required: true }]}
+            label={t`url`} hasFeedback {...formItemLayout}>
             <Input />
           </FormItem>
           <FormItem name='type' rules={[{ required: true }]}

@@ -23,7 +23,7 @@ export default modelExtend(pageModel, {
     setup({ dispatch, history }) {
       history.listen(location => {
         if (pathToRegexp('/pagecontrol').exec(location.pathname)) {
-          const payload = location.query || { page: 1, pageSize: 10 }
+          const payload = { ...location.query, currentPage: 1, size: 10 } || { currentPage: 1, size: 10 };
           dispatch({
             type: 'query',
             payload,
@@ -35,17 +35,18 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
+    
       const data = yield call(queryPageList, payload)
       console.log(data,'....');
       if (data && data.success) {
         yield put({
           type: 'querySuccess',
           payload: {
-            list: data.data || [],
+            list: data.data.data || [],
             pagination: {
-              current: Number(payload.page) || 1,
-              pageSize: Number(payload.pageSize) || 10,
-              total: data.total,
+              current: Number(payload.currentPage) || 1,
+              pageSize: Number(payload.size) || 10,
+              total: data.data.totalCount,
             },
           },
         })

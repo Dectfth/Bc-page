@@ -13,7 +13,7 @@ import Modal from './components/Modal'
 @connect(({ pagecontrol, loading }) => ({ pagecontrol, loading }))
 class User extends PureComponent {
   handleRefresh = newQuery => {
-    const { location } = this.props
+    const { location,dispatch } = this.props
     const { query, pathname } = location
 
     dispatch({
@@ -38,7 +38,7 @@ class User extends PureComponent {
       maskClosable: false,
       confirmLoading: loading.effects[`pagecontrol/${modalType}`],
       title: `${
-        modalType === 'create' ? t`Page User` : t`Update Page`
+        modalType === 'create' ? t`Create Page ` : t`Update Page`
       }`,
       centered: true,
       onOk: data => {
@@ -67,8 +67,8 @@ class User extends PureComponent {
       pagination,
       onChange: page => {
         this.handleRefresh({
-          page: page.current,
-          pageSize: page.pageSize,
+          currentPage: page.current,
+          size: page.pageSize,
         })
       },
       onDeleteItem: id => {

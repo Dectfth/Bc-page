@@ -5,6 +5,7 @@ import { DropOption } from 'components'
 import { t } from "@lingui/macro"
 import { Trans } from "@lingui/macro"
 import { Link } from 'umi'
+import moment from 'moment'
 import styles from './List.less'
 
 const { confirm } = Modal
@@ -30,31 +31,43 @@ class List extends PureComponent {
 
     const columns = [
       {
-        title: <Trans>ID</Trans>,
+        title: <Trans>pageID</Trans>,
         dataIndex: 'id',
         key: 'id',
         width: '7%',
-        render: text => <Avatar style={{ marginLeft: 8 }} src={text} />,
       },
       {
         title: <Trans>文章名字</Trans>,
-        dataIndex: 'name',
+        dataIndex: 'title',
         width: '20%',
-        key: 'name',
-        render: (text, record) => <Link to={`user/${record.id}`}>{text}</Link>,
+        key: 'title',
       },
       {
         title: <Trans>URL</Trans>,
-       
         dataIndex: 'url',
         key: 'url',
       },
       {
-        title: <Trans>type</Trans>,
-        dataIndex: 'type',
-        key: 'type',
+        title: <Trans>article Type</Trans>,
+        dataIndex: 'articleType',
+        key: 'articleType',
         width: '7%',
-        render: text => <span>{text ? 'video' : 'article'}</span>,
+        render: text => <span>{text == 1 ? 'Article' : 'Video'}</span>
+      },
+      {
+        title: <Trans>文章分类</Trans>,
+        dataIndex: 'category',
+        width: '20%',
+        key: 'category',
+      },
+      {
+        title: <Trans>创建时间</Trans>,
+        dataIndex: 'ts',
+        key: 'ts',
+        width: 180,
+        render:(record) =>{
+          return moment(record).format('YYYY-MM-DD HH:mm')
+        }
       },
       {
         title: <Trans>Operation</Trans>,
