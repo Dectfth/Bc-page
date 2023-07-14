@@ -45,6 +45,7 @@ class Filter extends Component {
   }
 
   handleReset = () => {
+      // 重置current 1
     const fields = this.formRef.current.getFieldsValue()
     for (let item in fields) {
       if ({}.hasOwnProperty.call(fields, item)) {
@@ -65,10 +66,9 @@ class Filter extends Component {
     fields = this.handleFields(fields)
     onFilterChange(fields)
   }
-
   render() {
     const { onAdd, filter } = this.props
-    const { name, address } = filter
+    const { title, id } = filter
 
     let initialCreateTime = []
     if (filter.createTime && filter.createTime[0]) {
@@ -79,12 +79,20 @@ class Filter extends Component {
     }
 
     return (
-      <Form ref={this.formRef} name="control-ref" initialValues={{ name }}>
+      <Form ref={this.formRef} name="control-ref" initialValues={{ title,id }}>
         <Row gutter={24}>
           <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-            <Form.Item name="name">
+            <Form.Item name="title">
               <Search
-                placeholder={t`Search Name`}
+                placeholder={t`Search title`}
+                onSearch={this.handleSubmit}
+              />
+            </Form.Item>
+          </Col>
+          <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
+            <Form.Item name="pageId">
+              <Search
+                placeholder={t`Search pageId`}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>

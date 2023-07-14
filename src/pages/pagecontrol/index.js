@@ -14,12 +14,11 @@ import Modal from './components/Modal'
 class User extends PureComponent {
   handleRefresh = newQuery => {
     const { location,dispatch } = this.props
-    const { query, pathname } = location
-
+    const {searchQuery} = this.state || {}
     dispatch({
       type: `pagecontrol/query`,
       payload: {
-        ...query,
+        ...searchQuery,
         ...newQuery,
       },
     })
@@ -30,23 +29,31 @@ class User extends PureComponent {
   get modalProps() {
     const { dispatch, pagecontrol, loading } = this.props
     const { currentItem, modalOpen, modalType } = pagecontrol
-
+    console.log(loading.effects, 'loading.effects')
     return {
       item: modalType === 'create' ? {} : currentItem,
       open: modalOpen,
       destroyOnClose: true,
       maskClosable: false,
-      confirmLoading: loading.effects[`pagecontrol/${modalType}`],
+      // confirmLoading: loading.effects[`pagecontrol/${modalType}`],
+      modalType:modalType,
       title: `${
-        modalType === 'create' ? t`Create Page ` : t`Update Page`
+        modalType === 'create' ? t`Add Page ` : t`Update Page`
       }`,
       centered: true,
+      //  区分add 和update,因为在保存的时候add是回首页，update是在当前页
       onOk: data => {
         dispatch({
           type: `pagecontrol/${modalType}`,
           payload: data,
         }).then(() => {
-          this.handleRefresh()
+          console.log('/then');
+          this.handleRefresh(
+            {
+              currentPage: 1,
+              size: 10,
+            }
+          )
         })
       },
       onCancel() {
@@ -60,6 +67,7 @@ class User extends PureComponent {
   get listProps() {
     const { dispatch, pagecontrol, loading } = this.props
     const { list=[], pagination, selectedRowKeys=[] } = pagecontrol
+
 
     return {
       dataSource: list,
@@ -77,10 +85,8 @@ class User extends PureComponent {
           payload: id,
         }).then(() => {
           this.handleRefresh({
-            page:
-              list.length === 1 && pagination.current > 1
-                ? pagination.current - 1
-                : pagination.current,
+            currentPage: pagination.current,
+            size: pagination.pageSize,
           })
         })
       },
@@ -94,6 +100,7 @@ class User extends PureComponent {
         })
       },
       rowSelection: {
+        type: 'radio',
         selectedRowKeys,
         onChange: keys => {
           dispatch({
@@ -110,15 +117,20 @@ class User extends PureComponent {
   get filterProps() {
     const { location, dispatch } = this.props
     const { query } = location
-
     return {
       filter: {
         ...query,
       },
       onFilterChange: value => {
-        this.handleRefresh({
-          ...value,
-        })
+        this.setState({
+          searchQuery: { ...value },
+        }, () => {
+          this.handleRefresh({
+            currentPage: 1,
+            size: 10,
+            ...value,
+          });
+        });
       },
       onAdd() {
         dispatch({
@@ -134,7 +146,6 @@ class User extends PureComponent {
   render() {
     const { pagecontrol } = this.props
     const { selectedRowKeys } = pagecontrol
-
     return (
       <Page inner>
         <Filter {...this.filterProps} />

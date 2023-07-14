@@ -28,7 +28,6 @@ class UserModal extends PureComponent {
           ...values,
           key: item.key,
         }
-        data.address = data.address.join(' ')
         onOk(data)
       })
       .catch(errorInfo => {

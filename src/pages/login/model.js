@@ -22,7 +22,7 @@ export default {
       const { locationQuery } = yield select(_ => _.app)
       if (data.success) {
         const { token } = data.data
-         store.set('Token', token)
+        store.set('Token', token)
         const { from } = locationQuery
         yield put({ type: 'app/query' })
         if (!pathToRegexp('/login').exec(from)) {

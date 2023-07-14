@@ -64,7 +64,7 @@ export default {
     '/test': {
       target: 'https://t-owsupport.renogy.cn/',
       changeOrigin: true,
-      pathRewrite: { '^/test': 'test' },
+      pathRewrite: { '^/test': '' },
     },
     '/local': {
       target: 'http://10.0.8.34:28081/',

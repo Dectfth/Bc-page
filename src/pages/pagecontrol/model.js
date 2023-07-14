@@ -35,9 +35,7 @@ export default modelExtend(pageModel, {
 
   effects: {
     *query({ payload = {} }, { call, put }) {
-    
       const data = yield call(queryPageList, payload)
-      console.log(data,'....');
       if (data && data.success) {
         yield put({
           type: 'querySuccess',
@@ -79,9 +77,10 @@ export default modelExtend(pageModel, {
     },
 
     *update({ payload }, { select, call, put }) {
-      const id = yield select(({ user }) => user.currentItem.id)
-      const newUser = { ...payload, id }
-      const data = yield call(createBcPage, newUser)
+      payload={
+        id:Number(payload.id)
+      }
+      const data = yield call(createBcPage, payload)
       if (data.success) {
         yield put({ type: 'hideModal' })
       } else {

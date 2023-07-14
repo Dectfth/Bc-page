@@ -16,6 +16,12 @@ class List extends PureComponent {
 
     if (e.key === '1') {
       onEditItem(record)
+      // confirm({
+      //   title: t`Are you sure update this record?`,
+      //   onOk() {
+      //     onDeleteItem(record.id)
+      //   },
+      // })
     } else if (e.key === '2') {
       confirm({
         title: t`Are you sure delete this record?`,
@@ -52,7 +58,7 @@ class List extends PureComponent {
         dataIndex: 'articleType',
         key: 'articleType',
         width: '7%',
-        render: text => <span>{text == 1 ? 'Article' : 'Video'}</span>
+        render: text => <span>{text == 1 ? 'Article' :text == 1 ?'Video':'无' }</span>
       },
       {
         title: <Trans>文章分类</Trans>,

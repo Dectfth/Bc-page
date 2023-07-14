@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
+import { Form, Input, InputNumber, Radio, Modal, Cascader, Row, Col } from 'antd'
 import { Trans } from "@lingui/macro"
 import city from 'utils/city'
+import styles from './List.less'
 import { t } from "@lingui/macro"
 
 const FormItem = Form.Item
@@ -28,7 +29,6 @@ class UserModal extends PureComponent {
           ...values,
           key: item.key,
         }
-        data.address = data.address.join(' ')
         onOk(data)
       })
       .catch(errorInfo => {
@@ -37,26 +37,35 @@ class UserModal extends PureComponent {
   }
 
   render() {
-    const { item = {}, onOk, form, ...modalProps } = this.props
+    const { item = {}, onOk,pagecontrol,modalType, form, ...modalProps } = this.props
+    
 
     return (
-      (<Modal {...modalProps} onOk={this.handleOk}>
-        <Form ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
-          <FormItem name='title' rules={[{ required: true }]}
+      (<Modal {...modalProps} onOk={this.handleOk} layout="horizontal">
+        <Form className={styles['modalpopup']}  disabled= {modalType === 'update'}  ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
+          <FormItem name='id' rules={[{ required: true }]}
+            label={t`id`} hasFeedback {...formItemLayout}>
+            <Input  />
+          </FormItem>
+        {modalType === 'update'?
+          <>
+            <FormItem name='title' rules={[{ required: true }]}
             label={t`title`} hasFeedback {...formItemLayout}>
             <Input />
           </FormItem>
           <FormItem name='url' rules={[{ required: true }]}
             label={t`url`} hasFeedback {...formItemLayout}>
-            <Input />
+            <Input  />
           </FormItem>
-          <FormItem name='type' rules={[{ required: true }]}
-            label={t`article`} hasFeedback {...formItemLayout}>
+          </>:''
+        }
+          <FormItem name='articleType' rules={[{ required: true }]}
+            label={t`articleType`} hasFeedback {...formItemLayout}>
             <Radio.Group>
-              <Radio value>
+              <Radio value={2}>
                 <Trans>video</Trans>
               </Radio>
-              <Radio value={false}>
+              <Radio value={1}>
                 <Trans>article</Trans>
               </Radio>
             </Radio.Group>
