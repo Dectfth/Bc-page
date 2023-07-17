@@ -35,7 +35,7 @@ class User extends PureComponent {
       open: modalOpen,
       destroyOnClose: true,
       maskClosable: false,
-      // confirmLoading: loading.effects[`pagecontrol/${modalType}`],
+      confirmLoading: loading.effects[`pagecontrol/${modalType}`],
       modalType:modalType,
       title: `${
         modalType === 'create' ? t`Add Page ` : t`Update Page`
