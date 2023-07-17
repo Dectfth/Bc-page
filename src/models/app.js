@@ -85,6 +85,9 @@ export default {
         goDashboard()
         return
       }
+      // 判断pathname 在login
+      // let pathname = location.pathname
+      
       const { locationPathname } = yield select(_ => _.app)
       
       const { success,data  } = yield call(queryUserInfo, payload)
@@ -118,7 +121,9 @@ export default {
         store.set('user', {})
         store.set('Token', '')
         store.set('isInit', false)
-        yield put({ type: 'query' })
+        history.push({
+          pathname: '/login',
+        })
     },
   },
   reducers: {

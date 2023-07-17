@@ -47,7 +47,6 @@ class User extends PureComponent {
           type: `pagecontrol/${modalType}`,
           payload: data,
         }).then(() => {
-          console.log('/then');
           this.handleRefresh(
             {
               currentPage: 1,

@@ -19,6 +19,6 @@ export default {
 
   queryDashboard: '/api/v1/dashboard',
   queryPageList:`/manager/article/search`,
-  createBcPage:`POST /manager/article/search/add/:id`,
+  createBcPage:`POST /manager/article/search/add`,
   removeBcPage: `DELETE /manager/article/search/delete/:id`,
 }

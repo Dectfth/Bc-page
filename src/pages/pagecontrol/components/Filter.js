@@ -6,6 +6,7 @@ import { Trans } from "@lingui/macro"
 import { t } from "@lingui/macro"
 import { Button, Row, Col, DatePicker, Form, Input, Cascader } from 'antd'
 import city from 'utils/city'
+import styles from './List.less'
 
 const { Search } = Input
 const { RangePicker } = DatePicker
@@ -79,7 +80,7 @@ class Filter extends Component {
     }
 
     return (
-      <Form ref={this.formRef} name="control-ref" initialValues={{ title,id }}>
+      <Form ref={this.formRef} name="control-ref" initialValues={{ title,id }} className={styles.prmodel} >
         <Row gutter={24}>
           <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
             <Form.Item name="title">
@@ -100,8 +101,8 @@ class Filter extends Component {
          
           <Col
             {...TwoColProps}
-            xl={{ span: 10 }}
-            md={{ span: 24 }}
+            xl={{ span: 16 }}
+            md={{ span: 8 }}
             sm={{ span: 24 }}
           >
             <Row type="flex" align="middle" justify="space-between">

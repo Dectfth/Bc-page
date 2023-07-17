@@ -78,7 +78,8 @@ export default modelExtend(pageModel, {
 
     *update({ payload }, { select, call, put }) {
       payload={
-        id:Number(payload.id)
+        pageId:Number(payload.pageId),
+        articleType:payload.articleType
       }
       const data = yield call(createBcPage, payload)
       if (data.success) {

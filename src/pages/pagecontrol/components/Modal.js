@@ -43,10 +43,10 @@ class UserModal extends PureComponent {
 
     return (
       (<Modal {...modalProps} onOk={this.handleOk} layout="horizontal">
-        <Form className={styles['modalpopup']}   ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
-          <FormItem name='id' rules={[{ required: true }]}
-            label={t`id`} hasFeedback {...formItemLayout}>
-            <Input  />
+        <Form className={styles['modalpopup']}   ref={this.formRef} name="control-ref" initialValues={{ ...item, pageId: item.id, address: item.address && item.address.split(' ') }} layout="horizontal">
+          <FormItem name='pageId' rules={[{ required: true }]}
+            label={t`pageId`} hasFeedback {...formItemLayout}>
+            <InputNumber  />
           </FormItem>
         {modalType === 'update'?
           <>
