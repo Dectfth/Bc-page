@@ -17,6 +17,7 @@ const formItemLayout = {
   },
 }
 
+console.log(styles,'.styles');
 class UserModal extends PureComponent {
   formRef = React.createRef()
 
@@ -42,7 +43,7 @@ class UserModal extends PureComponent {
 
     return (
       (<Modal {...modalProps} onOk={this.handleOk} layout="horizontal">
-        <Form className={styles['modalpopup']}  disabled= {modalType === 'update'}  ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
+        <Form className={styles['modalpopup']}   ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
           <FormItem name='id' rules={[{ required: true }]}
             label={t`id`} hasFeedback {...formItemLayout}>
             <Input  />
