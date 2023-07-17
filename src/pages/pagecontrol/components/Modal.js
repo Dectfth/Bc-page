@@ -54,10 +54,7 @@ class UserModal extends PureComponent {
             label={t`title`} hasFeedback {...formItemLayout}>
             <Input />
           </FormItem>
-          <FormItem name='url' rules={[{ required: true }]}
-            label={t`url`} hasFeedback {...formItemLayout}>
-            <Input  />
-          </FormItem>
+  
           </>:''
         }
           <FormItem name='articleType' rules={[{ required: true }]}

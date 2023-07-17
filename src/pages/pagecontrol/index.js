@@ -28,8 +28,7 @@ class User extends PureComponent {
 
   get modalProps() {
     const { dispatch, pagecontrol, loading } = this.props
-    const { currentItem, modalOpen, modalType } = pagecontrol
-    console.log(loading.effects, 'loading.effects')
+    const { currentItem, modalOpen, modalType, pagination } = pagecontrol
     return {
       item: modalType === 'create' ? {} : currentItem,
       open: modalOpen,
@@ -47,10 +46,12 @@ class User extends PureComponent {
           type: `pagecontrol/${modalType}`,
           payload: data,
         }).then(() => {
+          let curtpage =  modalType === 'create' ? 1 : pagination.current
+          let curtsize  = modalType === 'create' ? 10 : pagination.pageSize
           this.handleRefresh(
             {
-              currentPage: 1,
-              size: 10,
+              currentPage: curtpage,
+              size: curtsize,
             }
           )
         })

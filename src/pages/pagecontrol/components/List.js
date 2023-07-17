@@ -29,6 +29,13 @@ class List extends PureComponent {
           onDeleteItem(record.id)
         },
       })
+    }else if (e.key === '3') {
+      confirm({
+        title: t`Are you sure update page on BC?`,
+        onOk() {
+          window.open(`https://store-fhnch.mybigcommerce.com/manage/content/pages/${record.id}/edit`, '_blank');
+        },
+      })
     }
   }
 
@@ -49,16 +56,17 @@ class List extends PureComponent {
         key: 'title',
       },
       {
-        title: <Trans>URL</Trans>,
-        dataIndex: 'url',
-        key: 'url',
-      },
-      {
         title: <Trans>article Type</Trans>,
         dataIndex: 'articleType',
         key: 'articleType',
         width: '7%',
-        render: text => <span>{text == 1 ? 'Article' :text == 1 ?'Video':'无' }</span>
+        render: text => <span>{text == 1 ? 'Article' :text == 2 ?'Video':'无' }</span>
+      },
+      {
+        title: <Trans>URL</Trans>,
+        dataIndex: 'url',
+        key: 'url',
+        render: text => <a href={`https://www.renogy.com${text}`} key={text} target='_blank'>{text}</a>
       },
       {
         title: <Trans>文章分类</Trans>,
@@ -87,6 +95,7 @@ class List extends PureComponent {
               menuOptions={[
                 { key: '1', name: t`Update` },
                 { key: '2', name: t`Delete` },
+                { key: '3', name: t`ToBC` },
               ]}
             />
           )
