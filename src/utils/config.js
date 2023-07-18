@@ -1,6 +1,6 @@
 const { apiPrefix } = require('../../deploy.json')
 module.exports = {
-  siteName: 'BC page console',
+  siteName: 'LC Search Lib',
   copyright: '',
   logoPath: '/renogyLogo.webp',
   apiPrefix,
@@ -19,17 +19,13 @@ module.exports = {
   i18n: {
     /* Countrys flags: https://www.flaticon.com/packs/countrys-flags */
     languages: [
-      {
-        key: 'en',
-        title: 'English',
-        flag: '/america.svg',
-      },
+
       {
         key: 'zh',
         title: '中文',
         flag: '/china.svg',
       },
     ],
-    defaultLanguage: 'en',
+    defaultLanguage: 'zh',
   },
 }

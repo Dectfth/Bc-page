@@ -59,81 +59,8 @@ class Header extends PureComponent {
         item => item.key === language
       )
 
-      rightContent.unshift(
-        <Menu
-          key="language"
-          selectedKeys={[currentLanguage.key]}
-          onClick={data => {
-            setLocale(data.key)
-          }}
-          mode="horizontal"
-        >
-          <SubMenu title={<Avatar size="small" src={currentLanguage.flag} />}>
-            {languages.map(item => (
-              <Menu.Item key={item.key}>
-                <Avatar
-                  size="small"
-                  style={{ marginRight: 8 }}
-                  src={item.flag}
-                />
-                {item.title}
-              </Menu.Item>
-            ))}
-          </SubMenu>
-        </Menu>
-      )
     }
 
-    rightContent.unshift(
-      <Popover
-        placement="bottomRight"
-        trigger="click"
-        key="notifications"
-        overlayClassName={styles.notificationPopover}
-        getPopupContainer={() => document.querySelector('#primaryLayout')}
-        content={
-          <div className={styles.notification}>
-            <List
-              itemLayout="horizontal"
-              dataSource={notifications}
-              locale={{
-                emptyText: <Trans>You have viewed all notifications.</Trans>,
-              }}
-              renderItem={item => (
-                <List.Item className={styles.notificationItem}>
-                  <List.Item.Meta
-                    title={
-                      <Ellipsis tooltip lines={1}>
-                        {item.title}
-                      </Ellipsis>
-                    }
-                    description={dayjs(item.date).fromNow()}
-                  />
-                  <RightOutlined style={{ fontSize: 10, color: '#ccc' }} />
-                </List.Item>
-              )}
-            />
-            {notifications.length ? (
-              <div
-                onClick={onAllNotificationsRead}
-                className={styles.clearButton}
-              >
-                <Trans>Clear notifications</Trans>
-              </div>
-            ) : null}
-          </div>
-        }
-      >
-        <Badge
-          count={notifications.length}
-          dot
-          offset={[-10, 10]}
-          className={styles.iconButton}
-        >
-          <BellOutlined className={styles.iconFont} />
-        </Badge>
-      </Popover>
-    )
 
     return (
       <Layout.Header
