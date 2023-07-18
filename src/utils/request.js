@@ -68,7 +68,6 @@ export default function request(options) {
       //包含两种， 1.接口报错 2.接口含错误信息 ======== 
 
       if ( data.success) {
-        console.log('.ENTER');
         return Promise.resolve({
             success: true,
             message: data.msg,
