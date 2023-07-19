@@ -25,7 +25,6 @@ class User extends PureComponent {
   }
 
 
-
   get modalProps() {
     const { dispatch, pagecontrol, loading } = this.props
     const { currentItem, modalOpen, modalType, pagination } = pagecontrol
@@ -151,18 +150,7 @@ class User extends PureComponent {
         <Filter {...this.filterProps} />
         {selectedRowKeys.length > 0 && (
           <Row style={{ marginBottom: 24, textAlign: 'right', fontSize: 13 }}>
-            <Col>
-              {`Selected ${selectedRowKeys.length} items `}
-              <Popconfirm
-                title="Are you sure delete these items?"
-                placement="left"
-                onConfirm={this.handleDeleteItems}
-              >
-                <Button type="primary" style={{ marginLeft: 8 }}>
-                  Remove
-                </Button>
-              </Popconfirm>
-            </Col>
+
           </Row>
         )}
         <List {...this.listProps} />
