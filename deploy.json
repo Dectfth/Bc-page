@@ -1,4 +1,4 @@
 {
     "publicPath":"",
-    "apiPrefix": "/test"
+    "apiPrefix": "https://t-owsupport.renogy.cn"
 }

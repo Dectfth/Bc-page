@@ -14,7 +14,7 @@ const v4Token = convertLegacyToken(mapToken)
 // how to speed compile: https://umijs.org/guide/boost-compile-speed
 export default {
   // IMPORTANT! change next line to yours or delete. And hide in dev
-  publicPath: isDevelopment ? '/' : 'https://cdn.antd-admin.zuiidea.com/',
+  publicPath:'/content/LC/dist/',
   alias: {
     api: resolve(__dirname, './src/services/'),
     components: resolve(__dirname, './src/components'),
