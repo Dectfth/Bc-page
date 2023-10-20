@@ -2,10 +2,9 @@ const { apiPrefix } = require('../../deploy.json')
 module.exports = {
   siteName: 'LC Search Lib',
   copyright: '',
-  logoPath: '/renogyLogo.webp',
+  logoPath: '/content/LC/dist/renogyLogo.webp',
   apiPrefix,
   fixedHeader: true, // sticky primary layout header
-
   /* Layout configuration, specify which layout to use for route. */
   layouts: [
     {

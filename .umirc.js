@@ -62,7 +62,7 @@ export default {
   // Webpack Configuration
   proxy: {
     '/test': {
-      target: 'https://t-owsupport.renogy.cn/',
+      target: 'https://officialweb.renogy-dchome.com/',
       changeOrigin: true,
       pathRewrite: { '^/test': '' },
     },
