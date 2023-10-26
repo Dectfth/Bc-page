@@ -83,17 +83,9 @@ class Filter extends Component {
       <Form ref={this.formRef} name="control-ref" initialValues={{ title,id }} className={styles.prmodel} >
         <Row gutter={24}>
           <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-            <Form.Item name="title">
+            <Form.Item name="query">
               <Search
-                placeholder={t`Search title`}
-                onSearch={this.handleSubmit}
-              />
-            </Form.Item>
-          </Col>
-          <Col {...ColProps} xl={{ span: 4 }} md={{ span: 8 }}>
-            <Form.Item name="pageId">
-              <Search
-                placeholder={t`Search pageId`}
+                placeholder={t`Search query`}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>
@@ -101,7 +93,7 @@ class Filter extends Component {
          
           <Col
             {...TwoColProps}
-            xl={{ span: 16 }}
+            xl={{ span: 20 }}
             md={{ span: 8 }}
             sm={{ span: 24 }}
           >

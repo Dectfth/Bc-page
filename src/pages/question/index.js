@@ -43,20 +43,17 @@ class User extends PureComponent {
       //  区分add 和update,因为在保存的时候add是回首页，update是在当前页
       onOk: data => {
         dispatch({
-          type: `questions/${modalType}`,
-          payload: {
-            ...data
-          },
-        }).then(() => {
-          let curtpage =  modalType === 'create' ? 1 : pagination.current
-          let curtsize  = modalType === 'create' ? 10 : pagination.pageSize
-          this.handleRefresh(
-            {
-              currentPage: curtpage,
-              size: curtsize,
-            }
-          )
+          type: 'questions/hideModal',
         })
+        let curtpage =  modalType === 'create' ? 1 : pagination.current
+        let curtsize  = modalType === 'create' ? 10 : pagination.pageSize
+        this.handleRefresh(
+          {
+            currentPage: curtpage,
+            size: curtsize,
+          }
+        )
+        
       },
       onCancel() {
         dispatch({
@@ -144,10 +141,10 @@ class User extends PureComponent {
       onInitPage: () => {
         dispatch({
           type: 'questions/init',
-          payload:  {
-            contentType:'learn',
-            parentPageIds:[160]
-          },
+          payload: {
+            contentType: "support",
+            parentPageIds: [392]
+          }
         }).then(() => {
           this.handleRefresh({
             currentPage: 1,

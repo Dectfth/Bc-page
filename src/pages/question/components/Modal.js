@@ -1,60 +1,57 @@
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader, Row, Col,Upload, Icon, message } from 'antd'
-import { Trans } from "@lingui/macro"
-import city from 'utils/city'
-import styles from './List.less'
-import { t } from "@lingui/macro"
-
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Upload, Modal, message,Button } from 'antd'
+import store from 'store'
+import { apiPrefix } from 'utils/config'
 const { Dragger } = Upload;
-const FormItem = Form.Item
-
-const formItemLayout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 14,
-  },
-}
-
 class UserModal extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      file: null,
-    };
-}
-  formRef = React.createRef()
-
   handleOk = () => {
-    const { item = {}, onOk } = this.props
-    const { file } = this.state;
-    onOk(file)
-  }
-  handleFileChange = (event) => {
-    console.log(event,'..event');
-    const file = event.file
-    const formData = new FormData();
-    formData.append('file', file);
-    console.log(file);
-    console.log(formData,'..');
+    const { onOk } = this.props;
+    onOk();
   };
-  render() {
-    const { item = {}, onOk,questions,modalType, form, ...modalProps } = this.props
-    
 
+  render() {
+    const { dispatch, item = {}, onOk, ...modalProps } = this.props;
+    const draggerProps = {
+      name: 'file',
+      multiple: true,
+      headers: {
+        Token:  store.get('Token')
+      },
+      action: `${apiPrefix}/manager/article/import/faq`,
+      onChange(info) {
+        const { status } = info.file;
+        console.log(info,'..info');
+        if (status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+          message.success(`${info.file.name}上传成功！`)
+        } else if (status === 'error') {
+          message.error(`${info.file.name} 上传失败！`)
+        }
+      },
+      onDrop(e) {
+        console.log('Dropped files', e.dataTransfer.files);
+      },
+    };
     return (
-      <Modal {...modalProps} onOk={this.handleOk} layout="horizontal">
+      <Modal {...modalProps} onOk={this.handleOk}
+      footer={[
+        <Button  onClick={this.handleOk}>
+          OK
+        </Button>,
+      ]}
+      layout="horizontal">
         <Dragger
-          name="file"
-          beforeUpload={() => false}
-          onChange={this.handleFileChange}
-          showUploadList={true}
+          {...draggerProps}
         >
           <p className="ant-upload-text">
             <span>点击上传文件</span>
             或者拖拽上传
+          </p>
+          <p className="ant-upload-hint">
+            上传成功即已导入
           </p>
         </Dragger>
       </Modal>
@@ -63,9 +60,9 @@ class UserModal extends PureComponent {
 }
 
 UserModal.propTypes = {
-  type: PropTypes.string,
   item: PropTypes.object,
   onOk: PropTypes.func,
-}
+};
 
-export default UserModal
+export default UserModal;
+ 

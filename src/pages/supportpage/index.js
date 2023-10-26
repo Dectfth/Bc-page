@@ -148,7 +148,7 @@ class User extends PureComponent {
           type: 'pagecontrol/init',
           payload:  {
             contentType:'support',
-            parentPageIds:[115]
+            parentPageIds:[392]
           },
         }).then(() => {
           this.handleRefresh({

@@ -11,38 +11,17 @@ import styles from './List.less'
 const { confirm } = Modal
 
 class List extends PureComponent {
-  handleMenuClick = (record, e) => {
-    const { onDeleteItem, onEditItem } = this.props
-
-    if (e.key === '1') {
-      onEditItem(record)
-      // confirm({
-      //   title: t`Are you sure update this record?`,
-      //   onOk() {
-      //     onDeleteItem(record.id)
-      //   },
-      // })
-    } else if (e.key === '2') {
-      confirm({
-        title: t`Are you sure delete this record?`,
-        onOk() {
-          onDeleteItem(record.id)
-        },
-      })
-    }else if (e.key === '3') {
-      confirm({
-        title: t`Are you sure update page on BC?`,
-        onOk() {
-          window.open(`https://store-fhnch.mybigcommerce.com/manage/content/pages/${record.id}/edit`, '_blank');
-        },
-      })
-    }
-  }
 
   render() {
     const { onDeleteItem, onEditItem, ...tableProps } = this.props
 
     const columns = [
+      {
+        title: <Trans>文章名字</Trans>,
+        dataIndex: 'pageName',
+        width: '18s%',
+        key: 'pageName',
+      },
       {
         title: <Trans>	搜索命中高亮问题</Trans>,
         dataIndex: 'hlQuestion',
@@ -56,30 +35,11 @@ class List extends PureComponent {
         width: '25%',
       },
       {
-        title: <Trans>文章名字</Trans>,
-        dataIndex: 'pageName',
-        width: '18s%',
-        key: 'pageName',
-      },
-      // {
-      //   title: <Trans>article Type</Trans>,
-      //   dataIndex: 'articleType',
-      //   key: 'articleType',
-      //   width: '7%',
-      //   render: text => <span>{text == 1 ? 'Article' :text == 2 ?'Video':'无' }</span>
-      // },
-      {
         title: <Trans>URL</Trans>,
         dataIndex: 'pageUrl',
         key: 'pageUrl',
         render: text => <a href={`https://www.renogy.com${text}`} key={text} target='_blank'>{text}</a>
       },
-      // {
-      //   title: <Trans>文章分类</Trans>,
-      //   dataIndex: 'category',
-      //   width: '20%',
-      //   key: 'category',
-      // },
       {
         title: <Trans>创建时间</Trans>,
         dataIndex: 'ts',
@@ -88,24 +48,6 @@ class List extends PureComponent {
         render:(record) =>{
           return moment(record).format('YYYY-MM-DD HH:mm')
         }
-      },
-      {
-        title: <Trans>Operation</Trans>,
-        key: 'operation',
-        fixed: 'right',
-        width: '8%',
-        render: (text, record) => {
-          return (
-            <DropOption
-              onMenuClick={e => this.handleMenuClick(record, e)}
-              menuOptions={[
-                { key: '1', name: t`Update` },
-                { key: '2', name: t`Delete` },
-                { key: '3', name: t`ToBC` },
-              ]}
-            />
-          )
-        },
       },
     ]
 

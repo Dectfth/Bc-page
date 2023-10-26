@@ -25,5 +25,4 @@ export default {
   initBcPage:`POST /manager/article/initArticle`,
   queryQuestionsList:`/manager/article/page/questions`,
   
-  importFaq:`POST /manager/article/import/faq`
 }

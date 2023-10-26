@@ -8,7 +8,6 @@ const {
   createBcPage,
   removeBcPage,
   initBcPage,
-  importFaq
 } = api
 
 export default modelExtend(pageModel, {
@@ -69,14 +68,14 @@ export default modelExtend(pageModel, {
     },
 
 
-    *create({ payload }, { call, put }) {
-      const data = yield call(importFaq, payload)
-      if (data.success) {
-        yield put({ type: 'hideModal' })
-      } else {
-        throw data
-      }
-    },
+    // *create({ payload }, { call, put }) {
+    //   const data = yield call(importFaq, payload)
+    //   if (data.success) {
+    //     yield put({ type: 'hideModal' })
+    //   } else {
+    //     throw data
+    //   }
+    // },
 
     *update({ payload }, { select, call, put }) {
       payload={
@@ -99,14 +98,7 @@ export default modelExtend(pageModel, {
       }
     },
 
-    *importFaq({ payload }, { call, put }) {
-      const data = yield call(importFaq, payload)
-      if (data.success) {
-        console.log(data,'.importFaq');
-      } else {
-        throw data
-      }
-    },
+
 
   },
   
