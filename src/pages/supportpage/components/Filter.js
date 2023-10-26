@@ -68,7 +68,7 @@ class Filter extends Component {
     onFilterChange(fields)
   }
   render() {
-    const { onAdd, onInitPage, filter } = this.props
+    const { onAdd,onInitPage, filter } = this.props
     const { title, id } = filter
 
     let initialCreateTime = []
@@ -114,12 +114,9 @@ class Filter extends Component {
                 >
                   <Trans>Search</Trans>
                 </Button>
-                <Button
-                  className="margin-right"
-                  onClick={this.handleReset}>
+                <Button onClick={this.handleReset}>
                   <Trans>Reset</Trans>
                 </Button>
-          
               </div>
               <div>
                 <Button

@@ -1,0 +1,87 @@
+.table {
+  :global {
+    .ant-table td {
+      white-space: pre-wrap;
+    }
+  }
+}
+.modalpopup{
+  // background: #000;
+}
+.ant-modal-content{
+  :global {
+    .ant-modal-title{
+      background: red;
+    }
+  }
+}
+:global {
+  .ant-input-number-affix-wrapper{
+    width: 100%;
+  }
+  .ant-modal-content{
+    padding: 0 !important;
+    border-radius: 3px !important;
+  }
+  .ant-modal-header {
+    padding: 12px 24px;
+    color: #666;
+    background: #fff;
+    border-bottom: 1px solid #f4f4f4;
+    border-radius: 3px 3px 0 0;
+    margin-bottom: 0 !important;
+  }
+  .ant-modal-body{
+    padding: 24px;
+      font-size: 13px;
+      line-height: 1.5715;
+      word-wrap: break-word;
+  }
+  .ant-modal-footer{
+    padding: 10px 16px;
+    text-align: right;
+    background: transparent;
+    border-top: 1px solid #f4f4f4;
+    border-radius: 0 0 3px 3px;
+    margin-top: 0 !important; 
+      & .ant-btn-primary{
+        color: #fff;
+        border-color: #120f98;
+        background: #120f98;
+        border-radius: 4px;
+        &:hover{
+          background-color: #120f98 !important;
+          opacity: 0.8;
+        }
+      }
+  }
+}
+.prmodel{
+  :global {
+    .ant-col-md-8{
+      max-width: 100%;
+    }
+
+    .ant-btn-primary{
+      background: #120f98;
+      border-radius: 4px;
+      &:hover{
+        background-color: #120f98 !important;
+        opacity: 0.8;
+      }
+    }
+    .ant-btn-default{
+      border-radius: 4px;
+      color: #120f98;
+      background: #fff;
+      border: 1px solid #120f98;
+
+    }
+    .ant-input-search-button{
+      border: 1px solid #d9d9d9;
+      &:hover{
+        background: #FFF;
+      }
+    }
+  }
+}

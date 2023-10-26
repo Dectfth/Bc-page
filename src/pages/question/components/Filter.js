@@ -68,7 +68,7 @@ class Filter extends Component {
     onFilterChange(fields)
   }
   render() {
-    const { onAdd, onInitPage, filter } = this.props
+    const { onImport, onInitPage, filter } = this.props
     const { title, id } = filter
 
     let initialCreateTime = []
@@ -127,8 +127,8 @@ class Filter extends Component {
                   onClick={onInitPage}>
                  <Trans>InitAllArticle</Trans>
                 </Button>
-                <Button type="primary" onClick={onAdd}>
-                  <Trans>Create</Trans>
+                <Button type="primary" onClick={onImport}>
+                  <Trans>importQA</Trans>
                 </Button>
               </div>
             </Row>
@@ -140,7 +140,7 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-  onAdd: PropTypes.func,
+  onImport: PropTypes.func,
   filter: PropTypes.object,
   onFilterChange: PropTypes.func,
 }

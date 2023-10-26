@@ -21,4 +21,9 @@ export default {
   queryPageList:`/manager/article/search`,
   createBcPage:`POST /manager/article/search/add`,
   removeBcPage: `DELETE /manager/article/search/delete/:id`,
+
+  initBcPage:`POST /manager/article/initArticle`,
+  queryQuestionsList:`/manager/article/page/questions`,
+  
+  importFaq:`POST /manager/article/import/faq`
 }

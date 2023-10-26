@@ -10,15 +10,15 @@ import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
 
-@connect(({ pagecontrol, loading }) => ({ pagecontrol, loading }))
+@connect(({ supportpage, loading }) => ({ supportpage, loading }))
 class User extends PureComponent {
   handleRefresh = newQuery => {
     const { location,dispatch } = this.props
     const {searchQuery} = this.state || {}
     dispatch({
-      type: `pagecontrol/query`,
+      type: `supportpage/query`,
       payload: {
-        contentType:'learn',
+        contentType:'support',
         ...searchQuery,
         ...newQuery,
       },
@@ -27,25 +27,26 @@ class User extends PureComponent {
 
 
   get modalProps() {
-    const { dispatch, pagecontrol, loading } = this.props
-    const { currentItem, modalOpen, modalType, pagination } = pagecontrol
+    const { dispatch, supportpage, loading } = this.props
+    const { currentItem, modalOpen, modalType, pagination } = supportpage
     return {
       item: modalType === 'create' ? {} : currentItem,
       open: modalOpen,
       destroyOnClose: true,
       maskClosable: false,
-      confirmLoading: loading.effects[`pagecontrol/${modalType}`],
+      confirmLoading: loading.effects[`supportpage/${modalType}`],
       modalType:modalType,
       title: `${
-        modalType === 'create' ? t`Add Page ` : t`Update Page`
+        modalType === 'create' ? t`Add support Page ` : t`Update Page`
       }`,
       centered: true,
       //  区分add 和update,因为在保存的时候add是回首页，update是在当前页
       onOk: data => {
         dispatch({
-          type: `pagecontrol/${modalType}`,
+          type: `supportpage/${modalType}`,
           payload: {
-            contentType:'learn',
+            contentType:'support',
+            articleType:0,
             ...data
           },
         }).then(() => {
@@ -61,20 +62,18 @@ class User extends PureComponent {
       },
       onCancel() {
         dispatch({
-          type: 'pagecontrol/hideModal',
+          type: 'supportpage/hideModal',
         })
       },
     }
   }
 
   get listProps() {
-    const { dispatch, pagecontrol, loading } = this.props
-    const { list=[], pagination, selectedRowKeys=[] } = pagecontrol
-
-
+    const { dispatch, supportpage, loading } = this.props
+    const { list=[], pagination, selectedRowKeys=[] } = supportpage
     return {
       dataSource: list,
-      loading: loading.effects['pagecontrol/query'],
+      loading: loading.effects['supportpage/query'],
       pagination,
       onChange: page => {
         this.handleRefresh({
@@ -84,7 +83,7 @@ class User extends PureComponent {
       },
       onDeleteItem: id => {
         dispatch({
-          type: 'pagecontrol/delete',
+          type: 'supportpage/delete',
           payload: id,
         }).then(() => {
           this.handleRefresh({
@@ -95,7 +94,7 @@ class User extends PureComponent {
       },
       onEditItem(item) {
         dispatch({
-          type: 'pagecontrol/showModal',
+          type: 'supportpage/showModal',
           payload: {
             modalType: 'update',
             currentItem: item,
@@ -107,7 +106,7 @@ class User extends PureComponent {
         selectedRowKeys,
         onChange: keys => {
           dispatch({
-            type: 'pagecontrol/updateState',
+            type: 'supportpage/updateState',
             payload: {
               selectedRowKeys: keys,
             },
@@ -118,8 +117,8 @@ class User extends PureComponent {
   }
 
   get filterProps() {
-    const { location, pagecontrol, dispatch } = this.props
-    const { pagination } = pagecontrol
+    const { location,supportpage, dispatch } = this.props
+    const { pagination } = supportpage
     const { query } = location
     return {
       filter: {
@@ -138,7 +137,7 @@ class User extends PureComponent {
       },
       onAdd() {
         dispatch({
-          type: 'pagecontrol/showModal',
+          type: 'supportpage/showModal',
           payload: {
             modalType: 'create',
           },
@@ -148,8 +147,8 @@ class User extends PureComponent {
         dispatch({
           type: 'pagecontrol/init',
           payload:  {
-            contentType:'learn',
-            parentPageIds:[160]
+            contentType:'support',
+            parentPageIds:[115]
           },
         }).then(() => {
           this.handleRefresh({
@@ -162,8 +161,8 @@ class User extends PureComponent {
   }
 
   render() {
-    const { pagecontrol } = this.props
-    const { selectedRowKeys } = pagecontrol
+    const { supportpage } = this.props
+    const { selectedRowKeys } = supportpage
     return (
       <Page inner>
         <Filter {...this.filterProps} />
@@ -180,7 +179,7 @@ class User extends PureComponent {
 }
 
 User.propTypes = {
-  pagecontrol: PropTypes.object,
+  supportpage: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
   loading: PropTypes.object,
